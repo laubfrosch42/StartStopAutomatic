@@ -13,8 +13,8 @@ volatile uint8_t LEDN_before;
 volatile uint16_t LEDcounter = 0;
 
 #define LED_N  PB2
-#define SSAout PB3
-#define SSAin  PB4
+#define SSAin  PB3
+#define SSAout PB4
 #define EEPReadByte(addr) eeprom_read_byte((uint8_t *)addr)
 #define EEPWriteByte(addr, val) eeprom_write_byte((uint8_t *)addr, val)
 
