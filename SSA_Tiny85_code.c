@@ -11,7 +11,6 @@ volatile uint8_t LEDN_now;
 volatile uint8_t LEDN_before;
 volatile uint16_t LEDcounter = 0;
 
-#define F_CPU 1000000UL 
 #define LED_N  PB2
 #define SSAout PB3
 #define SSAin  PB4
@@ -29,10 +28,6 @@ void press_button (void)
 int main (void)
 {
 	DDRB   = DDRB | (1<<SSAout);              // set SSAout as output
-	
-	DDRB   = DDRB | (1<<PB0) | (1<<PB1);
-	PORTB  = PORTB | (1<<PB0);
-	
 	PORTB  = PORTB | (1<<SSAin) | (1<<LED_N); // set Pull-Up-Resistor at SSAin and LED_N
 	TCCR0A = 0b00000010;                      // Timer CTC mode
 	TCCR0B = 0b00000010;                      // set prescaler 8
@@ -83,5 +78,4 @@ ISR(TIMER0_COMPA_vect)
 	else                      {LEDcounter = LEDcounter + 1;}
 	if (LEDcounter >= 200)    {LEDN_now = 1; LEDcounter = 200;} //keep at 200 to avoid overflow and jump back to 0
 	else                      {LEDN_now = 0;}
-	PORTB = PORTB ^ ((1<<PB0) | (1<<PB1));
 }
