@@ -14,3 +14,4 @@ By that you have the same control as in a manual gearshift.
 A. input signals
 B. interrupt handling
 C. output signal
+D. unused option to use SSA-button-LED to get status
