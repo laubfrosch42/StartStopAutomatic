@@ -1,4 +1,5 @@
 //StartStopAutomatic
+//licensed under GNU General Public License v3.0 or later
 
 #include <stdlib.h>
 #include <avr/io.h>
