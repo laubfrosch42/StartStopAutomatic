@@ -13,12 +13,12 @@ volatile uint8_t LED_N_status;
 volatile uint8_t LED_SSA_status;
 volatile uint16_t LEDcounter = 0;
 
-#define LED_SSA_IN				PB1
-#define LED_N_IN				PB2
-#define BUTTON_SSA_IN			PB3
-#define BUTTON_SSA_OUT			PB4
-#define EEPReadByte(addr)		eeprom_read_byte((uint8_t *)addr)
-#define EEPWriteByte(addr, val)	eeprom_write_byte((uint8_t *)addr, val)
+#define LED_SSA_IN PB1
+#define LED_N_IN PB2
+#define BUTTON_SSA_IN PB3
+#define BUTTON_SSA_OUT PB4
+#define EEPReadByte(addr) eeprom_read_byte((uint8_t *)addr)
+#define EEPWriteByte(addr, val) eeprom_write_byte((uint8_t *)addr, val)
 
 void press_button (void)
 {
