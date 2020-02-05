@@ -1,0 +1,9 @@
+PCB 1x
+ATTiny85 1x
+Resistor 1MOhm 3x
+Resistor 1KOhm x
+Resistor xxx
+Fuse 100mA 4x
+Voltage Regulator
+Capacitor 303 1x
+Capacitor 104 1x
