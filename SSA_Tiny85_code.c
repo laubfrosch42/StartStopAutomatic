@@ -49,6 +49,7 @@ int main (void)
 		while (!(PINB & (1<<BUTTON_SSA_IN))); // wait until button is not pressed anymore
 		if (EEPvalue == 1) {EEPWriteByte(0, 0); EEPvalue = 0;}
 		else {EEPWriteByte(0, 1); EEPvalue = 1;}
+		_delay_ms(50); // to avoid bouncing-effect resulting in immediate switch off by interrupt
 	}
 
 	// sleep if toggled off
