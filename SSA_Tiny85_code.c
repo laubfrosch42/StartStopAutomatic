@@ -63,14 +63,14 @@ int main (void)
 	while (1)
 	{
 		if (LED_SSA_status == LED_N_status) {press_button(); _delay_ms(50);}
-		if (switchoff == 1) {MCUCR = 0b00110000; sleep_mode();}
+		if (switch_off == 1) {MCUCR = 0b00110000; sleep_mode();}
 	}
 }
 
 ISR(TIMER0_COMPA_vect)
 {
 	// check if SSA button is presses to switch off this programme
-	if (!(PINB & (1<<BUTTON_SSA_IN))) {switchoff = 1;}
+	if (!(PINB & (1<<BUTTON_SSA_IN))) {switch_off = 1;}
 
 	// check status LED_SSA
 	if (!(PINB & (1<<LED_SSA_IN))) {LED_SSA_status = 0;}
