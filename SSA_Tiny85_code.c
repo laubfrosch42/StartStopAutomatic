@@ -33,12 +33,12 @@ void press_button (void)
 
 int main (void)
 {
-	DDRB   = DDRB | (1<<BUTTON_SSA_OUT);                 // set BUTTON_SSA_OUT as output
-	PORTB  = PORTB | (1<<BUTTON_SSA_IN) | (1<<LED_N_IN); // set Pull-Up-Resistor at BUTTON_SSA_IN and LED_N_IN
-	TCCR0A = 0b00000010;                                 // Timer CTC mode
-	TCCR0B = 0b00000010;                                 // set prescaler 8
-	OCR0A  = 250;                                        // overflow at 250 * prescaler 8 = divider 2000 = 2ms-interrupt at 1MHz
-	TIMSK  = 0b00010000;                                 // CTC compare A and timer interrupt enable
+	DDRB   = DDRB | (1<<BUTTON_SSA_OUT); // set BUTTON_SSA_OUT as output
+	PORTB  = PORTB | (1<<BUTTON_SSA_IN) | (1<<LED_N_IN) | (1<<LED_SSA_IN); // set Pull-Up-Resistor at BUTTON_SSA_IN and LED_N_IN
+	TCCR0A = 0b00000010; // Timer CTC mode
+	TCCR0B = 0b00000010; // set prescaler 8
+	OCR0A  = 250; // overflow at 250 * prescaler 8 = divider 2000 = 2ms-interrupt at 1MHz
+	TIMSK  = 0b00010000; // CTC compare A and timer interrupt enable
 
 	EEPvalue = EEPReadByte(0); // read stored on/off status in EEPROM
 	if (!(EEPvalue == 1 || EEPvalue == 0)) {EEPWriteByte(0, 1); EEPvalue = 1;} // if not 0/1 then set 1
