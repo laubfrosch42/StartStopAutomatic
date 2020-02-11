@@ -56,7 +56,7 @@ int main (void)
 	if (EEPvalue == 0) {MCUCR = 0b00110000; sleep_mode();}
 
 	sei();         // enable interrupts and start creating LED_X_status
-	_delay_ms(3000); // a bit of time to collect LED_X_status
+	_delay_ms(3000); // a bit of time to collect LED_X_status and wait for car-electronics to be ready
 
 	// endless loop to check and act if LED_N_status equals LED_SSA_status
 	// by logic the status needs to be different (if LED_N is ON, then LED_SSA shall be OFF)
@@ -96,4 +96,4 @@ ISR(TIMER0_COMPA_vect)
 		}
 	}
 }
-// end of file
+// ****** end of file ******
