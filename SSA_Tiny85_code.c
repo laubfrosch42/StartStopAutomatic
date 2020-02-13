@@ -33,8 +33,8 @@ void press_button (void)
 
 int main (void)
 {
-	DDRB   = DDRB | (1<<BUTTON_SSA_OUT); // set BUTTON_SSA_OUT as output
-	PORTB  = PORTB | (1<<BUTTON_SSA_IN) | (1<<LED_N_IN) | (1<<LED_SSA_IN); // set Pull-Up-Resistor at BUTTON_SSA_IN and LED_N_IN
+	DDRB   = DDRB | (1<<BUTTON_SSA_OUT); // set output
+	PORTB  = PORTB | (1<<BUTTON_SSA_IN) | (1<<LED_N_IN) | (1<<LED_SSA_IN); // set Pull-Up-Resistors
 	TCCR0A = 0b00000010; // Timer CTC mode
 	TCCR0B = 0b00000010; // set prescaler 8
 	OCR0A  = 250; // overflow at 250 * prescaler 8 = divider 2000 = 2ms-interrupt at 1MHz
@@ -56,7 +56,7 @@ int main (void)
 	if (EEPvalue == 0) {MCUCR = 0b00110000; sleep_mode();}
 
 	sei();         // enable interrupts and start creating LED_X_status
-	_delay_ms(3000); // a bit of time to collect LED_X_status and wait for car-electronics to be ready
+	_delay_ms(2000); // a bit of time to collect LED_X_status and wait for car-electronics to be ready
 
 	// endless loop to check and act if LED_N_status equals LED_SSA_status
 	// by logic the status needs to be different (if LED_N is ON, then LED_SSA shall be OFF)
@@ -73,16 +73,11 @@ ISR(TIMER0_COMPA_vect)
 	if (!(PINB & (1<<BUTTON_SSA_IN))) {switch_off = 1;}
 
 	// check status LED_SSA
-	if (!(PINB & (1<<LED_SSA_IN))) {LED_SSA_status = 0;}
-	else {LED_SSA_status = 1;}
+	if (PINB & (1<<LED_SSA_IN)) {LED_SSA_status = 1;}
+	else {LED_SSA_status = 0;}
 
 	// check status LED_N
-	if (!(PINB & (1<<LED_N_IN)))
-	{
-		LEDcounter = 0;
-		LED_N_status = 0;
-	}
-	else
+	if (PINB & (1<<LED_N_IN))
 	{
 		LEDcounter = LEDcounter + 1;
 		if (LEDcounter >= 200) // with 2ms-interrupt this leads to a minimum of 400ms to switch LED_N_status to ON
@@ -94,6 +89,11 @@ ISR(TIMER0_COMPA_vect)
 		{
 			LED_N_status = 0;
 		}
+	}
+	else
+	{
+		LEDcounter = 0;
+		LED_N_status = 0;
 	}
 }
 // ****** end of file ******
