@@ -1,0 +1,11 @@
+PCB 1x
+ATTiny85 1x
+Resistor 1MOhm 3x
+Resistor 1kOhm 1x
+Resistor 4.7kOhm 2x
+Fuse 100mA 4x
+Voltage Regulator L78M05CV 1x
+Capacitor 334 1x
+Capacitor 104 1x
+Transistor BC548 4x
+Transistor BC558 1x
